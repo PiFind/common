@@ -20,9 +20,11 @@ import java.util.Map;
  *     然后使用 {@link QueryObject} 注解对其进行标注，你就可以方便的
  *     使用拼装工具直接得到一个拼装好的 {@link java.net.URI} 对象了。
  * </p>
- * <p  color = "red">
+ * <p>
+ *     <font style="color:red;">
  *     <b>注意：</b> 该拼装工具仅支持拼装一维数组，不支持
  *     拼装二维及多维数组。
+ *     </font>
  * </p>
  * @see QueryObject
  */
@@ -79,8 +81,10 @@ public class UriSplicedUtils {
 
     /**
      * 检查并拼接URI参数
-     * <p color = "red">
+     * <p>
+     *     <font style="color:red;">
      *     <b>注意：</b>被拼接的对象需要被 {@link QueryObject} 注解标注
+     *     </font>
      * </p>
      * @param uri 需要拼接的uri字符串
      * @param obj 需要检查并拼接的参数对象
@@ -98,8 +102,10 @@ public class UriSplicedUtils {
 
     /**
      * 检查并拼接URI参数并转换为字符串
-     * <p color = "red">
+     * <p>
+     *     <font style="color:red;">
      *     <b>注意：</b>被拼接的对象需要被 {@link QueryObject} 注解标注
+     *     </font>
      * </p>
      * @param uri 需要拼接的uri字符串
      * @param obj 需要检查并拼接的参数对象
