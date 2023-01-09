@@ -2,6 +2,8 @@
 
 所有 PiFind 的web服务相关项目都要引入该项目
 
+**注意：** 该版本为快照版本
+
 ## Maven 引入方式
 
 **第一步** 请在 Maven 的 setting.xml 中添加如下服务器配置
@@ -43,6 +45,6 @@
     <dependency>
         <groupId>io.pifind</groupId>
         <artifactId>common</artifactId>
-        <version>0.0.1</version>
+        <version>0.0.2-snapshot</version>
     </dependency>
 ```
