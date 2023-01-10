@@ -1,6 +1,7 @@
 package io.pifind.common.response;
 
 import lombok.Data;
+import javax.validation.constraints.NotNull;
 
 /**
  * 通用返回
@@ -18,7 +19,7 @@ public class R<T> {
     /** 返回的数据 */
     private T data;
 
-    public R(Integer code, String message) {
+    public R(@NotNull Integer code, String message) {
         this(code,message,null);
     }
 
