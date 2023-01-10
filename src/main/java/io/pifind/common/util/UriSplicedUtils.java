@@ -32,9 +32,9 @@ public class UriSplicedUtils {
 
     /**
      * 拼接URI参数
-     * @param uri 需要拼接的uri字符串
+     * @param uri 需要拼接的URI字符串
      * @param obj 需要拼接的参数对象
-     * @return 拼接好的uri
+     * @return {@link URI 拼接好的URI}
      */
     @SuppressWarnings("rawtypes")
     public static URI splice(String uri,Object obj) {
@@ -71,9 +71,9 @@ public class UriSplicedUtils {
 
     /**
      * 拼接URI参数并转换为字符串
-     * @param uri 需要拼接的uri字符串
+     * @param uri 需要拼接的URI字符串
      * @param obj 需要拼接的参数对象
-     * @return 拼接好的uri字符串
+     * @return {@link String 拼接好的URI字符串}
      */
     public static String spliceToString(String uri, Object obj) {
         return splice(uri,obj).toString();
@@ -86,9 +86,9 @@ public class UriSplicedUtils {
      *     <b>注意：</b>被拼接的对象需要被 {@link QueryObject} 注解标注
      *     </font>
      * </p>
-     * @param uri 需要拼接的uri字符串
+     * @param uri 需要拼接的URI字符串
      * @param obj 需要检查并拼接的参数对象
-     * @return 拼接好的uri字符串
+     * @return {@link String 拼接好的URI字符串}
      * @throws RuntimeException 如果对象没有通过检查或没有被 {@link QueryObject} 注解标注，就会抛出此异常
      * @see QueryObject
      */
@@ -107,9 +107,9 @@ public class UriSplicedUtils {
      *     <b>注意：</b>被拼接的对象需要被 {@link QueryObject} 注解标注
      *     </font>
      * </p>
-     * @param uri 需要拼接的uri字符串
+     * @param uri 需要拼接的URI字符串
      * @param obj 需要检查并拼接的参数对象
-     * @return 拼接好的uri字符串
+     * @return {@link String 拼接好的URI字符串}
      * @throws RuntimeException 如果对象没有通过检查或没有被 {@link QueryObject} 注解标注，就会抛出此异常
      * @see QueryObject
      */
@@ -119,8 +119,8 @@ public class UriSplicedUtils {
 
     /**
      * 对被 {@link QueryObject} 注解标注的对象进行拼接
-     * @param obj 需要拼接的uri字符串
-     * @return 拼接好的uri
+     * @param obj 被 {@link QueryObject} 注解标注的对象
+     * @return {@link URI 拼接好的URI}
      * @throws RuntimeException 如果对象没有被 {@link QueryObject} 注解标注，就会抛出此异常
      * @see QueryObject
      */
@@ -137,8 +137,8 @@ public class UriSplicedUtils {
 
     /**
      * 对被 {@link QueryObject} 注解标注的对象进行拼接，将拼接结果转换为字符串
-     * @param obj 需要拼接的uri字符串
-     * @return 拼接好的uri字符串
+     * @param obj 被 {@link QueryObject} 注解标注的对象
+     * @return {@link String 拼接好的URI字符串}
      * @throws RuntimeException 如果对象没有被 {@link QueryObject} 注解标注，就会抛出此异常
      * @see QueryObject
      */
@@ -150,7 +150,7 @@ public class UriSplicedUtils {
      * 拼接URI参数
      * @param uri 需要拼接的uri字符串
      * @param params 参数
-     * @return 拼接好的uri
+     * @return {@link URI 拼接好的URI}
      */
     public static URI splice(String uri, MultiValueMap<String, String> params) {
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(uri)
@@ -162,7 +162,7 @@ public class UriSplicedUtils {
      * 拼接URI参数转换为字符串
      * @param uri 需要拼接的uri字符串
      * @param params 参数
-     * @return 拼接好的uri字符串
+     * @return {@link String 拼接好的URI字符串}
      */
     public static String spliceToString(String uri, MultiValueMap<String, String> params) {
         return splice(uri,params).toString();
@@ -172,7 +172,13 @@ public class UriSplicedUtils {
      * 检查对象类型是否能够进行请求
      * @param uri 需要拼接的uri字符串
      * @param clazz 需要检查的类型
-     * @return {@code true} 可以查询 / {@code false} 不可以查询
+     * @return 返回的类型为 {@link Boolean}
+     * <p>
+     *     <ul>
+     *         <li><b>可以查询</b> - {@code true} </li>
+     *         <li><b>不可以查询</b> -  {@code false} </li>
+     *     </ul>
+     * </p>
      * @param <T> 检查类的泛型
      */
     private static <T> boolean checkQueryUri(String uri,Class<T> clazz) {
