@@ -7,6 +7,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
@@ -38,7 +39,7 @@ public class UriSplicedUtils {
      * @return {@link URI 拼接好的URI}
      */
     @SuppressWarnings("rawtypes")
-    public static URI splice(@NotNull String uri,@NotNull Object obj) {
+    public static URI splice(@NotEmpty String uri, @NotNull Object obj) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         try {
             Map<String,Object> map =  PropertyUtils.describe(obj);
@@ -76,7 +77,7 @@ public class UriSplicedUtils {
      * @param obj 需要拼接的参数对象
      * @return {@link String 拼接好的URI字符串}
      */
-    public static String spliceToString(@NotNull String uri,@NotNull Object obj) {
+    public static String spliceToString(@NotEmpty String uri,@NotNull Object obj) {
         return splice(uri,obj).toString();
     }
 
@@ -93,7 +94,7 @@ public class UriSplicedUtils {
      * @throws RuntimeException 如果对象没有通过检查或没有被 {@link QueryObject} 注解标注，就会抛出此异常
      * @see QueryObject
      */
-    public static URI checkAndSplice(@NotNull String uri,@NotNull Object obj) {
+    public static URI checkAndSplice(@NotEmpty String uri,@NotNull Object obj) {
         if (checkQueryUri(uri,obj.getClass())) {
             return splice(uri,obj);
         } else {
@@ -114,7 +115,7 @@ public class UriSplicedUtils {
      * @throws RuntimeException 如果对象没有通过检查或没有被 {@link QueryObject} 注解标注，就会抛出此异常
      * @see QueryObject
      */
-    public static String checkAndSpliceToString(@NotNull String uri,@NotNull Object obj) {
+    public static String checkAndSpliceToString(@NotEmpty String uri,@NotNull Object obj) {
         return checkAndSplice(uri,obj).toString();
     }
 
@@ -153,7 +154,7 @@ public class UriSplicedUtils {
      * @param params 参数
      * @return {@link URI 拼接好的URI}
      */
-    public static URI splice(@NotNull String uri,@NotNull MultiValueMap<String, String> params) {
+    public static URI splice(@NotEmpty String uri,@NotNull MultiValueMap<String, String> params) {
         UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(uri)
                 .queryParams(params);
         return builder.build().toUri();
@@ -182,7 +183,7 @@ public class UriSplicedUtils {
      * </p>
      * @param <T> 检查类的泛型
      */
-    private static <T> boolean checkQueryUri(@NotNull String uri,@NotNull Class<T> clazz) {
+    private static <T> boolean checkQueryUri(@NotEmpty String uri,@NotNull Class<T> clazz) {
         if (clazz.isAnnotationPresent(QueryObject.class)) {
             QueryObject queryObjectAnno = clazz.getAnnotation(QueryObject.class);
             for (String enabledUri : queryObjectAnno.value()) {
