@@ -7,7 +7,6 @@ import java.util.TreeSet;
 /**
  * 响应处理管理器
  */
-@Component
 public class ResponseBodyHandlerManager extends TreeSet<IResponseBodyHandler> {
 
     public ResponseBodyHandlerManager() {

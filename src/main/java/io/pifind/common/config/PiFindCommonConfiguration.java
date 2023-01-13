@@ -3,7 +3,6 @@ package io.pifind.common.config;
 import io.pifind.common.i18n.MessageBundle;
 import io.pifind.common.i18n.ResponseMessageHandler;
 import io.pifind.common.response.ResponseBodyHandlerManager;
-import io.pifind.common.response.StandardResponseBodyAdvice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

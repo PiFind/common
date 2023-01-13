@@ -138,6 +138,7 @@ public class R<T> implements Cloneable {
      *     错误码枚举需要被 {@link ErrorCode} 注解进行标注
      * </p>
      * @param errorCode 错误码枚举类的一个值
+     * @param params 错误码参数
      * @return 失败结果
      * @param <E> 枚举类类型
      * @param <T> 数据类型
