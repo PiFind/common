@@ -1,5 +1,6 @@
 package io.pifind.common.response;
 
+import io.pifind.common.exception.ServerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -41,6 +42,13 @@ public class StandardResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             } else {
                 return ((R<?>) body).clone();
             }
+        } else if (body instanceof ServerException) {
+            // 如果是可预测的服务器异常，那么就返回异常的错误代码
+            ServerException exception = (ServerException) body;
+            return new R<>(
+                    exception.getCode(),
+                    StandardCode.SERVER_ERROR_MESSAGE
+            );
         } else {
             // 如果不是正常的返回结果，就认为发生了异常，
             // 进行对异常的统一异常处理

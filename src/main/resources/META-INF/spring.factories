@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.pifind.common.config.ResponseBodyHandlerManager
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.pifind.common.config.PiFindCommonConfiguration

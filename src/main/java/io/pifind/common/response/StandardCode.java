@@ -1,5 +1,7 @@
 package io.pifind.common.response;
 
+import io.pifind.common.exception.ServerExceptionCode;
+
 /**
  * 标准返回码列表
  */
@@ -12,7 +14,7 @@ public interface StandardCode {
     int FAILURE = 0x0001;
 
     /** 服务器错误 */
-    int SERVER_ERROR = 0xAAAA;
+    int SERVER_ERROR = ServerExceptionCode.START_CODE;
 
     /** 通用成功响应消息 **/
     String SUCCESS_MESSAGE = "success";
