@@ -11,4 +11,16 @@ public interface StandardCode {
     /** 通用失败码 */
     int FAILURE = 0x0001;
 
+    /** 服务器错误 */
+    int SERVER_ERROR = 0xAAAA;
+
+    /** 通用成功响应消息 **/
+    String SUCCESS_MESSAGE = "success";
+
+    /** 通用失败响应消息 */
+    String FAILURE_MESSAGE = "failure";
+
+    /** 服务器错误 */
+    String SERVER_ERROR_MESSAGE = "server error";
+
 }

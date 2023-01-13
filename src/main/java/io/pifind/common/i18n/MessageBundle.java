@@ -8,7 +8,7 @@ import org.springframework.context.i18n.LocaleContextHolder;
  */
 public class MessageBundle {
 
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
 
     public MessageBundle(MessageSource messageSource) {
         this.messageSource = messageSource;
@@ -24,5 +24,8 @@ public class MessageBundle {
         return messageSource.getMessage(key,params, LocaleContextHolder.getLocale());
     }
 
+    public MessageSource getMessageSource() {
+        return messageSource;
+    }
 
 }
