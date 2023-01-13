@@ -39,7 +39,7 @@ public class ResponseMessageHandler implements IResponseBodyHandler {
     public <T> R<T> handle(R<T> response) {
         R<T> newResponse;
 
-        if(response.getNeedTranslateMessage()) {
+        if(Boolean.TRUE == response.getNeedTranslateMessage()) {
 
             // 初始化响应结果
             newResponse = new R<>(
