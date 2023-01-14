@@ -1,7 +1,5 @@
 package io.pifind.common.response;
 
-import org.springframework.stereotype.Component;
-
 import java.util.TreeSet;
 
 /**

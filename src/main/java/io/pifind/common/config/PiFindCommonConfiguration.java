@@ -25,7 +25,7 @@ public class PiFindCommonConfiguration {
      */
     @Bean
     public ResponseBodyHandlerManager responseBodyHandlerManager() {
-        ResponseBodyHandlerManager responseBodyHandlerManager = new io.pifind.common.response.ResponseBodyHandlerManager();
+        ResponseBodyHandlerManager responseBodyHandlerManager = new ResponseBodyHandlerManager();
         responseBodyHandlerManager.add(
                 new ResponseMessageHandler(
                         new MessageBundle(messageSource)

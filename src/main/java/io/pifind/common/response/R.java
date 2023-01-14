@@ -3,7 +3,6 @@ package io.pifind.common.response;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.pifind.common.annotation.ErrorCode;
 import lombok.Data;
-import javax.validation.constraints.NotNull;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -15,7 +14,7 @@ import java.lang.reflect.Method;
 public class R<T> implements Cloneable {
 
     /** 错误码 */
-    private Integer code;
+    private int code;
 
     /** 返回消息 */
     private String message;
@@ -45,11 +44,11 @@ public class R<T> implements Cloneable {
     @JsonIgnore
     private Object[] messageParams;
 
-    public R(@NotNull Integer code, String message) {
+    public R(int code, String message) {
         this(code,message,null);
     }
 
-    public R(Integer code, String message, T data) {
+    public R(int code, String message, T data) {
         this.code = code;
         this.message = message;
         this.data = data;
@@ -131,6 +130,24 @@ public class R<T> implements Cloneable {
         return new R<>(StandardCode.FAILURE,message);
     }
 
+    /**
+     * 自定义错误码的返回值
+     * <p>
+     *     <font style="color:red;">
+     *     <b>注意：</b> 错误码不能等于 0 ,参见 {@link StandardCode#SUCCESS}
+     *     </font>
+     * </p>
+     * @param code 自定义的错误码
+     * @param message 错误消息
+     * @return 失败结果
+     * @param <T> data的类型
+     */
+    public static <T> R<T> failure(int code,String message) {
+        if (code != StandardCode.SUCCESS) {
+            return new R<>(code,message);
+        }
+        throw new RuntimeException("无效的错误码");
+    }
 
     /**
      * 根据错误码枚举类返回失败结果
@@ -141,7 +158,7 @@ public class R<T> implements Cloneable {
      * @param params 错误码参数
      * @return 失败结果
      * @param <E> 枚举类类型
-     * @param <T> 数据类型
+     * @param <T> data的类型
      * @see ErrorCode
      */
     public static <E extends Enum<E>,T> R<T> failure(E errorCode,Object...params) {
@@ -149,7 +166,7 @@ public class R<T> implements Cloneable {
         if(errorCodeClass.isAnnotationPresent(ErrorCode.class)) {
 
             int code ;
-            String messageId;
+            String message;
 
             try {
 
@@ -157,20 +174,24 @@ public class R<T> implements Cloneable {
                 Method codeMethod = errorCodeClass.getMethod("code");
                 code = (int) codeMethod.invoke(errorCode);
 
-                // 获取国际化的 messageId 方法
-                Method messageIdMethod =  errorCodeClass.getMethod("messageId");
-                messageId = (String) messageIdMethod.invoke(errorCode);
+                // 获取国际化的 message 方法
+                Method messageIdMethod =  errorCodeClass.getMethod("message");
+                message = (String) messageIdMethod.invoke(errorCode);
 
             } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException  e) {
                 throw new RuntimeException(e);
             }
 
             // 创建结果
-            R<T> result = new R<>(code,messageId);
+            R<T> result = new R<>(code,message);
 
-            // 设置国际化属性需要的字段
-            result.setNeedTranslateMessage(true);
-            result.setMessageParams(params);
+            // 判断是否需要国际化
+            ErrorCode errorCodeAnno = errorCodeClass.getAnnotation(ErrorCode.class);
+            if (errorCodeAnno.translate()) {
+                // 设置国际化属性需要的字段
+                result.setNeedTranslateMessage(true);
+                result.setMessageParams(params);
+            }
 
             // 返回结果
             return result;
