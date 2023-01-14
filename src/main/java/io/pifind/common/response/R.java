@@ -44,6 +44,12 @@ public class R<T> implements Cloneable {
     @JsonIgnore
     private Object[] messageParams;
 
+    /**
+     * 消息前缀
+     */
+    @JsonIgnore
+    private String messagePrefix;
+
     public R(int code, String message) {
         this(code,message,null);
     }
@@ -175,8 +181,21 @@ public class R<T> implements Cloneable {
                 code = (int) codeMethod.invoke(errorCode);
 
                 // 获取国际化的 message 方法
-                Method messageIdMethod =  errorCodeClass.getMethod("message");
-                message = (String) messageIdMethod.invoke(errorCode);
+                Method messageIdMethod = null;
+                Method[] methods = errorCodeClass.getMethods();
+                for (Method method : methods) {
+                    if (method.getName().equals("message") && method.getParameterCount() == 0) {
+                        messageIdMethod = errorCodeClass.getMethod("message");
+                        break;
+                    }
+                }
+
+                // 获取 message 消息，如果没有 message 方法，那么就将枚举名作为 message
+                if (messageIdMethod != null) {
+                    message = (String) messageIdMethod.invoke(errorCode);
+                } else {
+                    message = errorCode.name();
+                }
 
             } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException  e) {
                 throw new RuntimeException(e);
@@ -192,6 +211,9 @@ public class R<T> implements Cloneable {
                 result.setNeedTranslateMessage(true);
                 result.setMessageParams(params);
             }
+
+            // 设置前缀
+            result.setMessagePrefix(errorCodeAnno.messagePrefix());
 
             // 返回结果
             return result;

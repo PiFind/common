@@ -3,7 +3,7 @@ package io.pifind.common.response;
 import java.util.Comparator;
 
 /**
- * 响应拦截器，对当前响应进行拦截
+ * 响应体处理器
  */
 public interface IResponseBodyHandler {
 
@@ -15,7 +15,7 @@ public interface IResponseBodyHandler {
     int order();
 
     /**
-     * 蓝机器处理方法
+     * 预处理方法
      * @param response 源结果
      * @return 处理后的结果
      * @param <T> 原结果中数据类型

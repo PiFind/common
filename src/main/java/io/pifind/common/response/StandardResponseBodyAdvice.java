@@ -36,12 +36,25 @@ public class StandardResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             ServerHttpResponse response) {
 
         if (body instanceof R) {
+
+            R<?> result;
+
+            // 对返回值进行处理
             if (responseBodyHandlerManager != null) {
                 // 如果是正常返回值就正常返回
-                return responseBodyHandlerManager.handle((R<?>)body);
+                result =  responseBodyHandlerManager.handle((R<?>)body);
             } else {
-                return ((R<?>) body).clone();
+                result = ((R<?>) body).clone();
             }
+
+            // 设置前缀
+            if (result.getMessagePrefix() != null) {
+                result.setMessage(
+                        result.getMessagePrefix() + result.getMessage()
+                );
+            }
+
+            return result;
         } else if (body instanceof ServerException) {
             // 如果是可预测的服务器异常，那么就返回异常的错误代码
             ServerException exception = (ServerException) body;
