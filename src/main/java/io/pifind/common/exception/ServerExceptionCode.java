@@ -1,37 +1,39 @@
 package io.pifind.common.exception;
 
 /**
- * 服务器异常代码
+ * 服务器异常码
+ * <p>
+ *     服务器异常码范围为：0xA00000 ~ 0xAFFFFF，以下为服务器异常下的细分类目：
+ * </p>
+ * <div class="classUseContainer">
+ * <table class="overviewSummary" border="0" cellpadding="3" cellspacing="0">
+ * <tr>
+ * <th>异常类型</th>
+ * <th>范围</th>
+ * <th>备注</th>
+ * </tr>
+ * <tr>
+ * <td>数据库异常</td>
+ * <td>0xA10000 ~ 0xA1FFFF</td>
+ * <td>{@link ServerExceptionCode#DATABASE_EXCEPTION_CODE}</td>
+ * </tr>
+ * <tr>
+ * <td>远程调用异常</td>
+ * <td>0xA20000 ~ 0xA2FFFF</td>
+ * <td>{@link ServerExceptionCode#RPC_EXCEPTION_CODE}</td>
+ * </tr>
+ * <tr>
+ * <td>第三方服务异常</td>
+ * <td>0xA30000 ~ 0xA3FFFF</td>
+ * <td>{@link ServerExceptionCode#THIRD_PART_SERVICE_EXCEPTION}</td>
+ * </tr>
+ * </table>
+ * </div>
  */
 public interface ServerExceptionCode {
 
     /**
      * 服务器异常，范围：0xA00000 ~ 0xAFFFFF
-     * <p>
-     *     以下为服务器异常下的细分类目：
-     * </p>
-     * <table>
-     *     <tr>
-     *         <th>异常类型</th>
-     *         <th>范围</th>
-     *         <th>备注</th>
-     *     </tr>
-     *     <tr>
-     *         <td>数据库异常</td>
-     *         <td>0xA10000 ~ 0xA1FFFF</td>
-     *         <td>{@link ServerExceptionCode#DATABASE_EXCEPTION_CODE}</td>
-     *     </tr>
-     *     <tr>
-     *         <td>远程调用异常</td>
-     *         <td>0xA20000 ~ 0xA2FFFF</td>
-     *         <td>{@link ServerExceptionCode#RPC_EXCEPTION_CODE}</td>
-     *     </tr>
-     *     <tr>
-     *         <td>第三方服务异常</td>
-     *         <td>0xA30000 ~ 0xA3FFFF</td>
-     *         <td>{@link ServerExceptionCode#THIRD_PART_SERVICE_EXCEPTION}</td>
-     *     </tr>
-     * </table>
      */
     int SERVER_EXCEPTION_CODE = 0xA00000 ;
 
