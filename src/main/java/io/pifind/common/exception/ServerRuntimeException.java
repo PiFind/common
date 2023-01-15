@@ -11,10 +11,11 @@ public class ServerRuntimeException extends RuntimeException implements IStatusC
     private final int code;
 
     public ServerRuntimeException(int code,String message) {
-        super(code + ":" + message);
+        super(String.format("0x%X",code) + ":" + message);
         this.code = code;
     }
 
+    @Override
     public int getCode() {
         return code;
     }
