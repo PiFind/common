@@ -1,6 +1,8 @@
 package io.pifind.common.response;
 
+import io.pifind.common.exception.IStatusCodeException;
 import io.pifind.common.exception.ServerException;
+import io.pifind.common.exception.ServerRuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
@@ -55,9 +57,9 @@ public class StandardResponseBodyAdvice implements ResponseBodyAdvice<Object> {
             }
 
             return result;
-        } else if (body instanceof ServerException) {
+        } else if (body instanceof ServerException || body instanceof ServerRuntimeException) {
             // 如果是可预测的服务器异常，那么就返回异常的错误代码
-            ServerException exception = (ServerException) body;
+            IStatusCodeException exception = (IStatusCodeException) body;
             return new R<>(
                     exception.getCode(),
                     StandardCode.SERVER_ERROR_MESSAGE

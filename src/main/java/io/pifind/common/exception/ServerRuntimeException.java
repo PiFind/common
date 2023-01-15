@@ -1,16 +1,16 @@
 package io.pifind.common.exception;
 
 /**
- * 服务器异常
+ * 服务器运行时异常（不进行检查，直接抛出）
  */
-public class ServerException extends Throwable implements IStatusCodeException{
+public class ServerRuntimeException extends RuntimeException implements IStatusCodeException{
 
     /**
      * 错误码
      */
     private final int code;
 
-    public ServerException(int code,String message) {
+    public ServerRuntimeException(int code,String message) {
         super(code + ":" + message);
         this.code = code;
     }
