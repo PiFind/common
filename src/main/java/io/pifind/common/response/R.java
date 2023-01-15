@@ -213,7 +213,9 @@ public class R<T> implements Cloneable {
             }
 
             // 设置前缀
-            result.setMessagePrefix(errorCodeAnno.messagePrefix());
+            if (!errorCodeAnno.messagePrefix().isEmpty()) {
+                result.setMessagePrefix(errorCodeAnno.messagePrefix());
+            }
 
             // 返回结果
             return result;
