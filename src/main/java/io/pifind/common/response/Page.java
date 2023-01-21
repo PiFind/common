@@ -14,11 +14,6 @@ import java.util.List;
 public class Page<T> {
 
     /**
-     * 一页有多少条数据
-     */
-    private Integer pageSize;
-
-    /**
      * 当前是第几页
      * <p>
      *     <font style="color:red;">
@@ -27,6 +22,11 @@ public class Page<T> {
      * </p>
      */
     private Integer currentPage;
+
+    /**
+     * 一页有多少条数据
+     */
+    private Integer pageSize;
 
     /**
      * 一共有多少条数据

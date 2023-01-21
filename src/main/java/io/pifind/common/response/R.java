@@ -5,6 +5,7 @@ import io.pifind.common.annotation.ErrorCode;
 import lombok.Data;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 /**
  * 通用返回
@@ -223,6 +224,26 @@ public class R<T> implements Cloneable {
         } else {
             throw new RuntimeException("不能使用未注解的 ErrorCode");
         }
+    }
+
+    /**
+     * 返回一页对象（默认返回状态为成功）
+     * @param current 当前是第几页
+     * @param size 一页能存多少数据
+     * @param total 一共多少页
+     * @param records 当前页记录的数据
+     * @return {@link Page 页标准返回对象}
+     * @param <T> 数据类型
+     * @see Page
+     */
+    public static <T> R<Page<T>> page(int current,int size,int total,List<T> records) {
+        Page<T> page = new Page<>(
+                current,
+                size,
+                total,
+                records
+        );
+        return R.success(page);
     }
 
 }
