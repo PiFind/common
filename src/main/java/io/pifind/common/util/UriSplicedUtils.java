@@ -2,6 +2,8 @@ package io.pifind.common.util;
 
 import io.pifind.common.annotation.QueryObject;
 
+import io.pifind.common.util.exception.QueryObjectException;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -30,6 +32,7 @@ import java.util.Map;
  * </p>
  * @see QueryObject
  */
+@Slf4j
 public class UriSplicedUtils {
 
     /**
@@ -66,7 +69,7 @@ public class UriSplicedUtils {
                 }
             }
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            throw new RuntimeException(e);
+            throw new QueryObjectException(e.getMessage());
         }
         return splice(uri,params);
     }
@@ -91,14 +94,14 @@ public class UriSplicedUtils {
      * @param uri 需要拼接的URI字符串
      * @param obj 需要检查并拼接的参数对象
      * @return {@link String 拼接好的URI字符串}
-     * @throws RuntimeException 如果对象没有通过检查或没有被 {@link QueryObject} 注解标注，就会抛出此异常
+     * @throws QueryObjectException 如果对象没有通过检查或没有被 {@link QueryObject} 注解标注，就会抛出此异常
      * @see QueryObject
      */
     public static URI checkAndSplice(@NotEmpty String uri,@NotNull Object obj) {
         if (checkQueryUri(uri,obj.getClass())) {
             return splice(uri,obj);
         } else {
-            throw new RuntimeException("不可访问");
+            throw new QueryObjectException("不可访问");
         }
     }
 
@@ -112,7 +115,7 @@ public class UriSplicedUtils {
      * @param uri 需要拼接的URI字符串
      * @param obj 需要检查并拼接的参数对象
      * @return {@link String 拼接好的URI字符串}
-     * @throws RuntimeException 如果对象没有通过检查或没有被 {@link QueryObject} 注解标注，就会抛出此异常
+     * @throws QueryObjectException 如果对象没有通过检查或没有被 {@link QueryObject} 注解标注，就会抛出此异常
      * @see QueryObject
      */
     public static String checkAndSpliceToString(@NotEmpty String uri,@NotNull Object obj) {
@@ -123,7 +126,7 @@ public class UriSplicedUtils {
      * 对被 {@link QueryObject} 注解标注的对象进行拼接
      * @param obj 被 {@link QueryObject} 注解标注的对象
      * @return {@link URI 拼接好的URI}
-     * @throws RuntimeException 如果对象没有被 {@link QueryObject} 注解标注，就会抛出此异常
+     * @throws QueryObjectException 如果对象没有被 {@link QueryObject} 注解标注，就会抛出此异常
      * @see QueryObject
      */
     public static URI splice(@NotNull Object obj) {
@@ -133,7 +136,7 @@ public class UriSplicedUtils {
             String uri = queryObjectAnno.value()[queryObjectAnno.defaultAPI()];
             return splice(uri,obj);
         } else {
-            throw new RuntimeException("未标注注解");
+            throw new QueryObjectException("未标注注解");
         }
     }
 
@@ -141,7 +144,7 @@ public class UriSplicedUtils {
      * 对被 {@link QueryObject} 注解标注的对象进行拼接，将拼接结果转换为字符串
      * @param obj 被 {@link QueryObject} 注解标注的对象
      * @return {@link String 拼接好的URI字符串}
-     * @throws RuntimeException 如果对象没有被 {@link QueryObject} 注解标注，就会抛出此异常
+     * @throws QueryObjectException 如果对象没有被 {@link QueryObject} 注解标注，就会抛出此异常
      * @see QueryObject
      */
     public static String spliceToString(@NotNull Object obj) {
