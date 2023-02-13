@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @EnableAutoConfiguration
-@ComponentScan("io.pifind.common")
+@ComponentScan("io.pifind.common.config")
 @SpringBootApplication
 public class ApplicationTest {
 
