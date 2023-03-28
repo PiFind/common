@@ -48,7 +48,7 @@ public class Page<T> {
      * @param <T> 返回的数据类型
      */
     public static <T> Page<T> singlePage(List<T> records) {
-        return new Page<>(records.size(),0, records.size(), records);
+        return new Page<>(1,records.size(), records.size(), records);
     }
 
 }
