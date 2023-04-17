@@ -3,6 +3,8 @@ package io.pifind.common.response;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.pifind.common.annotation.ErrorCode;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.List;
  * @param <T> 返回的数据类型
  */
 @Data
+@NoArgsConstructor
 public class R<T> implements Cloneable {
 
     /** 错误码 */
