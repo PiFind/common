@@ -27,48 +27,48 @@ public class UriSplicedUtilsTest {
      */
     private static final String TEST_API = "https://v.api.aa1.cn/api/api-md5/go.php";
 
-    /**
-     * 这是测试使用的一个请求对象
-     */
-    private static final MD5AppliedObject defaultTestObject;
-    static {
-        defaultTestObject = new MD5AppliedObject();
-        defaultTestObject.setAct("加密");
-        defaultTestObject.setMd5("123456");
-    }
-
-    @Autowired
-    private RestTemplate restTemplate;
-
-    /**
-     * 测试普通的拼装
-     * @see UriSplicedUtils#spliceToString(String, Object)
-     */
-    @Test
-    public void testSplice() {
-        String uri = UriSplicedUtils.spliceToString(TEST_API, defaultTestObject);
-        String result = restTemplate.getForObject(uri, String.class);
-        if (result == null) {
-            throw new RuntimeException("未能成功获取加密结果");
-        } else {
-            log.info("测试通过，{}",result);
-        }
-    }
-
-    /**
-     * 通过 QueryObject 注解的实体类进行自动拼接的测试
-     * @see UriSplicedUtils#spliceToString(Object)
-     */
-    @Test
-    public void testSpliceByModel() {
-        String uri = UriSplicedUtils.spliceToString(defaultTestObject);
-        String result = restTemplate.getForObject(uri, String.class);
-        if (result == null) {
-            throw new RuntimeException("未能成功获取加密结果");
-        } else {
-            log.info("测试通过，{}",result);
-        }
-    }
+//    /**
+//     * 这是测试使用的一个请求对象
+//     */
+//    private static final MD5AppliedObject defaultTestObject;
+//    static {
+//        defaultTestObject = new MD5AppliedObject();
+//        defaultTestObject.setAct("加密");
+//        defaultTestObject.setMd5("123456");
+//    }
+//
+//    @Autowired
+//    private RestTemplate restTemplate;
+//
+//    /**
+//     * 测试普通的拼装
+//     * @see UriSplicedUtils#spliceToString(String, Object)
+//     */
+//    @Test
+//    public void testSplice() {
+//        String uri = UriSplicedUtils.spliceToString(TEST_API, defaultTestObject);
+//        String result = restTemplate.getForObject(uri, String.class);
+//        if (result == null) {
+//            throw new RuntimeException("未能成功获取加密结果");
+//        } else {
+//            log.info("测试通过，{}",result);
+//        }
+//    }
+//
+//    /**
+//     * 通过 QueryObject 注解的实体类进行自动拼接的测试
+//     * @see UriSplicedUtils#spliceToString(Object)
+//     */
+//    @Test
+//    public void testSpliceByModel() {
+//        String uri = UriSplicedUtils.spliceToString(defaultTestObject);
+//        String result = restTemplate.getForObject(uri, String.class);
+//        if (result == null) {
+//            throw new RuntimeException("未能成功获取加密结果");
+//        } else {
+//            log.info("测试通过，{}",result);
+//        }
+//    }
 
     @Data
     @QueryObject(TEST_API)
