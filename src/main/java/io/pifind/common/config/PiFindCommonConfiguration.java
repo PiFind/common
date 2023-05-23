@@ -1,5 +1,6 @@
 package io.pifind.common.config;
 
+import io.pifind.common.core.CryptoResponseBodyHandler;
 import io.pifind.common.i18n.MessageBundle;
 import io.pifind.common.i18n.ResponseMessageHandler;
 import io.pifind.common.response.ResponseBodyHandlerManager;
@@ -30,6 +31,9 @@ public class PiFindCommonConfiguration {
                 new ResponseMessageHandler(
                         new MessageBundle(messageSource)
                 )
+        );
+        responseBodyHandlerManager.add(
+          new CryptoResponseBodyHandler()
         );
         return responseBodyHandlerManager;
     }
